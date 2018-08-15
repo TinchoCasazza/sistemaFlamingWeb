@@ -1,0 +1,39 @@
+.page-header {
+    background-color: #ff9400;
+    margin-top: 0;
+    padding: 20px 20px 20px 40px;
+}
+
+.page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
+    color: #ffffff;
+    font-size: 36pt;
+    text-decoration: none;
+}
+
+h3 {
+    color: white;
+    font-size: 30px;
+    font-family: 'Boogaloo', cursive;
+    padding-left: 10px;
+}
+
+td {
+    padding-left: 8px;
+    padding-top: 6px;
+    padding-bottom: 4px;
+}
+
+th {
+    padding-left: 8px;
+    padding-top: 6px;
+    font-size: 20;
+    color: white;
+    background: #FF8000;
+    border-color: white;
+}
+
+table {
+    background: #F5D0A9;
+    margin-left: 10px;
+    border-radius: 4px;
+}
