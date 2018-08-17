@@ -10,7 +10,7 @@ urlpatterns = [
     url(r'', include('compras.urls')),
     url(r'^django-sb-admin/', include('django_sb_admin.urls')),
     url(r'^home/', 'compras.views.home', name='home'),
-    url(r'^productos_list/', 'compras.views.productos', name='productos'),
+    url(r'^productos/', 'compras.views.productos', name='productos'),
 
 
 ]
