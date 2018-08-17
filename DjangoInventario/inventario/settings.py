@@ -37,8 +37,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'compras',
     'django_sb_admin',
+    'compras',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -57,7 +57,7 @@ ROOT_URLCONF = 'inventario.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -89,7 +89,7 @@ DATABASES = {
 
 LANGUAGE_CODE = 'es-ar'
 
-TIME_ZONE = 'America/Argentina'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
