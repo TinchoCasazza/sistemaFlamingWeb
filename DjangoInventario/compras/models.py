@@ -18,6 +18,7 @@ class Producto(models.Model):
     id = models.AutoField(primary_key=True)
     Nombre = models.CharField(max_length=50)
     Detalle = models.CharField(max_length=50)
+    Cantidad = models.IntegerField()
     PrecioVenta = models.DecimalField(max_digits=7, decimal_places=2)
     PrecioCosto = models.DecimalField(max_digits=7, decimal_places=2)
 
