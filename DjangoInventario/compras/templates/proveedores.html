@@ -1,3 +1,6 @@
+{% extends "base.html" %}
+
+{% block contenido %}
 <table class="table table-striped">
             <tr>
                 <th>Nombre</th> 
@@ -5,7 +8,7 @@
                 <th>Direccion</th>
             </tr>
             
-        {% for proveedor in proveedores %}
+        {% for proveedor in lista_proveedores %}
             <tr>
                 <td> {{ proveedor.Nombre }} </td> <td> {{ proveedor.Apellido }} </td> 
             </tr>
@@ -13,3 +16,4 @@
                 <p>No hay proveedores cargados.</p>
         {% endfor %}                       
 </table>   
+{% endblock %}

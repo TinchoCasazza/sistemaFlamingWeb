@@ -8,12 +8,12 @@ def inicio(request):
         return render(request, 'inicio.html', {})
 
 def productos(request):
-        productos = Producto.objects.all()
-        return render(request, 'productos.html', {'productos':productos})
+        lista_productos = Producto.objects.all()
+        return render(request, 'productos.html', {'lista_productos':lista_productos})
 
 def proveedores(request):
-        proveedores = Proveedores.objects.all()
-        return render(request, 'proveedores.html', {'proveedores':proveedores})
+        lista_proveedores = Proveedor.objects.all()
+        return render(request, 'proveedores.html', {'lista_proveedores':lista_proveedores})
 
 from .models import ProductoForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView

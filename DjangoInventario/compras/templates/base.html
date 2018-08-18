@@ -98,6 +98,7 @@
                         <!-- /input-group -->
                     </li>
                     {% url 'productos_url' as productos %}
+                    {% url 'proveedores_url' as proveedores %}
                     <li>                        
                         <a class="{% active request productos %}" href="{{ productos }}" style="font-family: Boogaloo; font-size:20px;"><i class="fas fa-box-open"></i></i> Productos</a>
                     </li>
@@ -114,7 +115,7 @@
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="{{ proveedores }}" style="font-family: Boogaloo; font-size:20px;"><i class="fas fa-people-carry"></i></i> Proveedores</a>
+                        <a class="{% active request proveedores %}" href="{{ proveedores }}" style="font-family: Boogaloo; font-size:20px;"><i class="fas fa-people-carry"></i></i> Proveedores</a>
                     </li>
                     <li>
                         <a href="forms.html" style="font-family: Boogaloo; font-size:20px;"><i class="fa fa-shopping-cart fa-fw"></i> Compras</a>
@@ -127,7 +128,7 @@
     </nav>
 
     <div id="page-wrapper">
-       {% block content %}{% endblock %}
+       {% block contenido %}{% endblock %}
     </div>
     <!-- /#page-wrapper -->
     
