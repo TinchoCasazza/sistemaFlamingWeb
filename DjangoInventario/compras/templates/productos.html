@@ -1,25 +1,23 @@
-{% extends "base.html" %}
+{% extends "base.html" %}}
 
-        <div id="page-wrapper">
-            <div class="panel-body">
-            <table class="table table-striped">
-                <tr>
-                    <th>Nombre</th> 
-                    <th>Detalle</th>
-                    <th>Venta</th>
-                    <th>Costo</th>
-                <tr>
-
-                {% for producto in productos %}
-                    </tr class="col-md-2">
-                        <td>{{ producto.Nombre }}</td> <td>{{ producto.Detalle }}</td> <td>$ {{ producto.PrecioVenta }}</td> <td>$ {{ producto.PrecioCosto }}</td> 
-                    <tr>
-                {% endfor %}
-                
-            </table>   
-            </div>  
-        </div>
-        <!-- /#page-wrapper -->
+{% block content %}
+    <div class="panel-body">
+        <table class="table table-striped">
+            <tr>
+                <th>Nombre</th> 
+                <th>Detalle</th>
+                <th>Venta</th>
+                <th>Costo</th>
+            <tr>
+            
+        {% for producto in productos %}
+            </tr class="col-md-2">
+                <td>{{ producto.Nombre }}</td> <td>{{ producto.Detalle }}</td> <td>$ {{ producto.PrecioVenta }}</td> <td>$ {{ producto.PrecioCosto }}</td> 
+            <tr>
+        {% endfor %}                       
+        </table>   
+    </div> 
+{% endblock %}
 
     
     

@@ -7,7 +7,6 @@ urlpatterns = [
     # url(r'^$', 'inventario.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^django-sb-admin/', include('django_sb_admin.urls')),
 ]
 
 from compras import views as compras_views
@@ -20,15 +19,21 @@ urlpatterns += [
 from django.conf import settings
 from django.conf.urls.static import static
 
-urlpatterns+= static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+#urlpatterns+= static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 #Add URL maps to redirect the base URL to our application
 from django.views.generic import RedirectView
 
-urlpatterns += [
-    url(r'^', RedirectView.as_view(url='/home/', permanent=True)),
-]
+#urlpatterns += [
+#    url(r'^', RedirectView.as_view(url='', permanent=True)),
+#]
 
 urlpatterns += [
     url(r'^accounts/', include('django.contrib.auth.urls')),
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns

@@ -4,6 +4,7 @@ from . import views
 # URLs del Modulo Compras 
 
 urlpatterns = [
-        url(r'^home', views.home),
-        url(r'^$/productos', views.productos),
+    url(r'^$', views.inicio, name = 'inicio_url'),
+    url(r'productos/$', views.productos, name = 'productos_url'),
+    url(r'producto_form/$', views.Alta_Producto, name = 'ProductoAlta_url'),
 ]
