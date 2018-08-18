@@ -1,0 +1,15 @@
+<table class="table table-striped">
+            <tr>
+                <th>Nombre</th> 
+                <th>Apellido</th>
+                <th>Direccion</th>
+            </tr>
+            
+        {% for proveedor in proveedores %}
+            <tr>
+                <td> {{ proveedor.Nombre }} </td> <td> {{ proveedor.Apellido }} </td> 
+            </tr>
+            {% empty %}
+                <p>No hay proveedores cargados.</p>
+        {% endfor %}                       
+</table>   

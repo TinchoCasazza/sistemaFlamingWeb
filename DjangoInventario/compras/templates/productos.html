@@ -1,19 +1,22 @@
 {% extends "base.html" %}}
 
 {% block content %}
-    <div class="panel-body">
+    <div>
         <table class="table table-striped">
             <tr>
                 <th>Nombre</th> 
                 <th>Detalle</th>
                 <th>Venta</th>
                 <th>Costo</th>
-            <tr>
+                <th>Ganacia</th>
+            </tr>
             
         {% for producto in productos %}
-            </tr class="col-md-2">
-                <td>{{ producto.Nombre }}</td> <td>{{ producto.Detalle }}</td> <td>$ {{ producto.PrecioVenta }}</td> <td>$ {{ producto.PrecioCosto }}</td> 
             <tr>
+                <td> {{ producto.Nombre }} </td> <td> {{ producto.Detalle }} </td> <td>$ {{ producto.PrecioVenta }}</td> <td>$ {{ producto.PrecioCosto }}</td>   
+            </tr>
+            {% empty %}
+                <p>No hay productos cargados.</p>
         {% endfor %}                       
         </table>   
     </div> 

@@ -5,7 +5,6 @@ from django.forms import ModelForm
 
 # Create your models here.
 
-
 class Proveedor(models.Model):
     id = models.AutoField(primary_key=True)
     Nombre =  models.CharField(max_length=100)
@@ -23,6 +22,15 @@ class Producto(models.Model):
     Cantidad = models.IntegerField(blank= True, null = True)
     PrecioVenta = models.DecimalField(max_digits=7, decimal_places=2)
     PrecioCosto = models.DecimalField(max_digits=7, decimal_places=2)
+
+    def __str__(self):
+        return self.Nombre
+
+class TipoPago(models.Model):
+    id = models.AutoField(primary_key=True)
+    Tipo = models.CharField(max_length=20)
+
+#class DetalleCompra(models.Model):    
 
 class ProductoForm(ModelForm):
     class Meta:
