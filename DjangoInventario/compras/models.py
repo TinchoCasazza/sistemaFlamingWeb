@@ -26,6 +26,9 @@ class Producto(models.Model):
     def __str__(self):
         return self.Nombre
 
+    def calcularGanancia(self):
+        return ( self.PrecioVenta - self.PrecioCosto )
+
 class TipoPago(models.Model):
     id = models.AutoField(primary_key=True)
     Tipo = models.CharField(max_length=20)
