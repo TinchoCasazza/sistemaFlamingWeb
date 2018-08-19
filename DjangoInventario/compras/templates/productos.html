@@ -68,19 +68,27 @@
         <!-- /.panel -->
     </div>
     <!-- /.col-lg-12 -->
-   <!-- <div class="panel-body">
-        <table class="table table-striped">
-            <tr>
-                <th>Nombre</th> 
-                <th>Detalle</th>
-                <th>Venta</th>
-                <th>Costo</th>
-            <tr>
-       {% for producto in lista_productos %}
-            </tr class="col-md-2">
-                <td> {{ producto.Nombre }} </td> <td>{{ producto.Detalle }}</td> <td>$ {{ producto.PrecioVenta }}</td> <td>$ {{ producto.PrecioCosto }}</td> 
-            <tr>
-        {% endfor %}  
-        </table>   
-    </div> -->
+    <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Agregar Producto</h4>
+        </div>
+        <div class="modal-body">
+            <form  method="POST" action="/productos" class="Alta-Producto-form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+            </form>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+      
+    </div>
+    </div>
 {% endblock %}

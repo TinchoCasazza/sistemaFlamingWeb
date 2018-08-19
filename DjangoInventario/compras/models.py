@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from django.utils import timezone
-from django.forms import ModelForm
 
 # Create your models here.
 
@@ -33,9 +32,5 @@ class TipoPago(models.Model):
     id = models.AutoField(primary_key=True)
     Tipo = models.CharField(max_length=20)
 
-#class DetalleCompra(models.Model):    
 
-class ProductoForm(ModelForm):
-    class Meta:
-        model = Producto
-        exclude = ['id']
+

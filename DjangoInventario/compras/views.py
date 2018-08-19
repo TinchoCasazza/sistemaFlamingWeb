@@ -1,23 +1,33 @@
 from django.shortcuts import render, render_to_response, redirect, get_object_or_404
 from .models import Producto
 from .models import Proveedor
+from . import forms
 # -*- coding: utf-8 -*-
 # Create your views here.
 
 def inicio(request):
         return render(request, 'inicio.html', {})
 
-def productos(request):
+def productos(request): 
         lista_productos = Producto.objects.all()
-        return render(request, 'productos.html', {'lista_productos':lista_productos})
+        if request.method == 'POST':
+                formProductos = forms.ProductoForm(request.POST)
+                if formProductos.is_valid():
+                        post = form.save(commit=False)
+                        post.author = request.user
+                        post.save()                      
+        else:
+                formProductos = forms.ProductoForm()
+        return render(request, 'productos.html', {'lista_productos':lista_productos , 'form' : formProductos})
 
 def proveedores(request):
         lista_proveedores = Proveedor.objects.all()
         return render(request, 'proveedores.html', {'lista_proveedores':lista_proveedores})
 
-from .models import ProductoForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 def Alta_Producto(request):
-    form = ProductoForm(request.POST) # Bound form
-    return render(request, 'producto_form.html', {'form': form})
+    formProductos = form.ProductoForm() # Bound form
+    return render(request, 'producto_form.html', {'form': formProductos})
+
+
