@@ -78,11 +78,11 @@
           <h4 class="modal-title">Agregar Producto</h4>
         </div>
         <div class="modal-body">
-            <form  method="POST" action="/productos" class="Alta-Producto-form">
+            <form  method="post" action="." class="Alta-Producto-form">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+                <input type="submit" class="btn btn-primary" data-dismiss="modal" value="Guardar"></input>
             </form>
         </div>
         <div class="modal-footer">
@@ -91,4 +91,10 @@
       
     </div>
     </div>
+    <form  method="post" action="." class="Alta-Producto-form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                <input type="submit" class="btn btn-primary" data-dismiss="modal" value="Guardar"></input>
+            </form>
 {% endblock %}

@@ -9,14 +9,15 @@ def inicio(request):
         return render(request, 'inicio.html', {})
 
 def productos(request): 
-        lista_productos = Producto.objects.all()
         if request.method == 'POST':
                 formProductos = forms.ProductoForm(request.POST)
                 if formProductos.is_valid():
-                        post = form.save(commit=False)
-                        post.author = request.user
-                        post.save()                      
+                        obj = Producto()
+                        obj = formProductos.save(commit=False)
+                        obj.save()       
+                        lista_productos = Producto.objects.all()               
         else:
+                lista_productos = Producto.objects.all()
                 formProductos = forms.ProductoForm()
         return render(request, 'productos.html', {'lista_productos':lista_productos , 'form' : formProductos})
 
