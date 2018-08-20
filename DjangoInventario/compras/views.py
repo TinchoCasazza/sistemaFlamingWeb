@@ -21,6 +21,19 @@ def productos(request):
                 formProductos = forms.ProductoForm()
         return render(request, 'productos.html', {'lista_productos':lista_productos , 'form' : formProductos})
 
+def ventas(request): 
+        if request.method == 'POST':
+                formVentas = forms.VentaForm(request.POST)
+                if formVentas.is_valid():
+                        obj = ventas()
+                        obj = formVentas.save(commit=False)
+                        obj.save()       
+                        lista_ventas = Producto.objects.all()               
+        else:
+                lista_ventas = Producto.objects.all()
+                formVentas = forms.VentaForm()
+        return render(request, 'ventas.html', {'lista_ventas':lista_ventas , 'form' : formVentas})
+
 def proveedores(request):
         if request.method == 'POST':
                 formProveedores = forms.ProveedorForm(request.POST)
