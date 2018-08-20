@@ -159,54 +159,7 @@
  
     <script type="text/javascript" src="https://cdn.datatables.net/v/ju/dt-1.10.18/datatables.min.js"></script>
     <script type="text/javascript" src="jquery.dataTables.js"></script>
-    {% csrf_token %}
-    <script>
-        $( document ).ready(function() {
-            $("#TableProductos").DataTable( {
-                "ordering": false,
-                "info": false
-            })
-            
-        });
-
-        function agregarFila(){ 
-            $("#myModal").modal();
-            
-        }   
-        
-        function getCookie(name) {
-            var cookieValue = null;
-            if (document.cookie && document.cookie != '') {
-                var cookies = document.cookie.split(';');
-                for (var i = 0; i < cookies.length; i++) {
-                    var cookie = jQuery.trim(cookies[i]);
-                    // Does this cookie string begin with the name we want?
-                    if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                        break;
-                    }
-                }
-            }
-            return cookieValue;
-        }       
-        var csrftoken = getCookie('csrftoken');
-
-
-        function guardarProductos(){
-            var t = $('#TableProductos').DataTable();
-            t.row.add([ $("#nombreProducto").val() , $("#detalleProducto").val() , $("#precioVenta").val() , $("#precioCosto").val() , 'sdsad' ]).draw( false );
-            $.ajax({
-                 token: csrftoken,
-                 type:"POST",
-                 url:"/productos/",
-                 data: {
-                        'Nombre': $('#nombreProducto').val() // from form
-                        }  
-            });
-            return false; //<---- move it here
-        }
-          
-    </script>
+    
 
 </body>
 

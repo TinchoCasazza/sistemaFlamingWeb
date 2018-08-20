@@ -14,12 +14,6 @@
             <div class="panel-body">
                 <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
                     <div class="col-sm-8">
-                        <div id="dataTables-example_filter" class="col-sm-2">
-                            <button id="buttonAgregar" style="margin-bottom: 8px;" class="btn btn-primary" onclick="agregarFila()" type="submit">Agregar</button>
-                        </div>
-                        <div id="dataTables-example_filter" class="col-sm-2">
-                            <button style="margin-bottom: 8px;" class="btn btn-primary" type="submit">Borrar</button>
-                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -68,33 +62,42 @@
         <!-- /.panel -->
     </div>
     <!-- /.col-lg-12 -->
-    <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
     
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Agregar Producto</h4>
-        </div>
-        <div class="modal-body">
-            <form  method="post" action="." class="Alta-Producto-form">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
-                <input type="submit" class="btn btn-primary" data-dismiss="modal" value="Guardar"></input>
-            </form>
-        </div>
-        <div class="modal-footer">
-        </div>
-      </div>
-      
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header" style="font-family: Boogaloo; font-size: 25px;">AGREGAR PRODUCTO:</h1>
     </div>
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <form  method="post" action="." class="Alta-Producto-form">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" class="btn btn-primary" data-dismiss="modal" value="Agregar"></input>
+                </form>
+            </div>
+        </div>
     </div>
-    <form  method="post" action="." class="Alta-Producto-form">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
-                <input type="submit" class="btn btn-primary" data-dismiss="modal" value="Guardar"></input>
-            </form>
+</div>
+
+<script>
+        $( document ).ready(function() {
+            $("#TableProductos").DataTable( {
+                "ordering": false,
+                "info": false
+            })
+            
+        });
+
+        function agregarFila(){ 
+            $("#myModal").modal();
+            
+        }   
+          
+</script>
+
 {% endblock %}
+
+
