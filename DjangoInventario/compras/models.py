@@ -13,7 +13,8 @@ class Proveedor(models.Model):
     id = models.AutoField(primary_key=True)
     Nombre =  models.CharField(max_length=100)
     Apellido = models.CharField(max_length=100)
-    Documento = models.CharField(max_length=12)
+    CUIT = models.CharField(max_length=12)
+    Direccion = models.CharField(max_length =40)
 
 class Compras(models.Model):
     id = models.AutoField(primary_key=True)

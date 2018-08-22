@@ -35,8 +35,17 @@ def ventas(request):
         return render(request, 'ventas.html', {'lista_ventas':lista_ventas , 'form' : formVentas})
 
 def proveedores(request):
-        lista_proveedores = Proveedor.objects.all()
-        return render(request, 'proveedores.html', {'lista_proveedores':lista_proveedores})
+        if request.method == 'POST':
+                formProveedores = forms.ProveedorForm(request.POST)
+                if formProveedores.is_valid():
+                        obj = Proveedor()
+                        obj = formProveedores.save(commit=False)
+                        obj.save()
+                        lista_proveedores = Proveedor.objects.all()
+        else:
+                lista_proveedores = Proveedor.objects.all()
+                formProveedores = forms.ProveedorForm()
+        return render(request, 'proveedores.html', {'form':formProveedores, 'lista_proveedores':lista_proveedores})
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
