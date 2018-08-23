@@ -32,7 +32,7 @@
 
     <!-- Morris Charts CSS -->
     <link href="../static/vendor/morrisjs/morris.css" rel="stylesheet">
-
+    
     <!-- Custom Fonts -->
     <link href="../static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
@@ -155,8 +155,12 @@
  
     <script type="text/javascript" src="https://cdn.datatables.net/v/ju/dt-1.10.18/datatables.min.js"></script>
 
+    <script type="text/javascript" src="https://cdn.datatables.net/select/1.2.6/js/dataTables.select.min.js"></script>
+    
+    <script type="text/javascript" src="https://editor.datatables.net/extensions/Editor/js/dataTables.editor.min.js"></script>  
 <script>
-        $(document).ready(function() {
+    var editor;
+    $(document).ready(function() {
             
             $('#TableProductos').DataTable( {
                 "ordering": false,
@@ -191,12 +195,49 @@
                 table.row('.selected').remove().draw( false );
                 $("#buttonBorrar").hide(500);
             } );
-        } );
 
+        editor = new $.fn.dataTable-editor.Editor( {
+        table: "#TableProductos",
+        fields: [ {
+                label: "Nombre:",
+                name: "nombre"
+            }, {
+                label: "Detalle:",
+                name: "detalle"
+            }, {
+                label: "Venta:",
+                name: "venta"
+            }, {
+                label: "Costo:",
+                name: "costo:",
+            }, {
+                label: "Ganancia:",
+                name: "ganancia"
+            }
+        ]
+    } );
+ 
+    $('#TableProductos').DataTable( {
+        dom: "Bfrtip",
+        columns: [
+            { data: "nombre" },
+            { data: "detalle" },
+            { data: "venta" },
+            { data: "costo" },
+            { data: "ganancia"}
+        ],
+        select: true,
+        buttons: [
+            { extend: "create", editor: editor },
+            { extend: "edit",   editor: editor },
+            { extend: "remove", editor: editor }
+        ]
+    } );
         function agregarFila(){ 
             $("#myModal").modal();
             
         }  
+ } );
 
 </script>
 
