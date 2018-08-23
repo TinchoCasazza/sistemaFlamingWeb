@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Producto,Venta,Proveedor
+from .models import Producto,Compra,Proveedor
 
 
 class ProductoForm(ModelForm):
@@ -12,7 +12,7 @@ class ProveedorForm(ModelForm):
         model = Proveedor
         exclude = ['id']
 
-class VentaForm(ModelForm):
+class CompraForm(ModelForm):
     class Meta:
-        model = Venta
-        exclude = ['idVenta']
+        model = Compra
+        exclude = ['idCompra']

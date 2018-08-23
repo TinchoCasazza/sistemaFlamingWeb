@@ -38,8 +38,8 @@ class TipoPago(models.Model):
     id = models.AutoField(primary_key=True)
     Tipo = models.CharField(max_length=20)
 
-class Venta(models.Model):
-    idVenta = models.AutoField(primary_key = True)
+class Compra(models.Model):
+    idCompra = models.AutoField(primary_key = True)
     producto = models.ForeignKey(Producto, on_delete=models.SET_NULL, null=True)
     Compras = models.IntegerField()
     ExistenciaFinal = models.IntegerField()

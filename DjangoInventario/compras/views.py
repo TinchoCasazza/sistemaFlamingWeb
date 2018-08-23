@@ -21,18 +21,18 @@ def productos(request):
                 formProductos = forms.ProductoForm()
         return render(request, 'productos.html', {'lista_productos':lista_productos , 'form' : formProductos})
 
-def ventas(request): 
+def compras(request): 
         if request.method == 'POST':
-                formVentas = forms.VentaForm(request.POST)
-                if formVentas.is_valid():
-                        obj = ventas()
+                formCompras = forms.compraForm(request.POST)
+                if formCompras.is_valid():
+                        obj = compras()
                         obj = formVentas.save(commit=False)
                         obj.save()       
-                        lista_ventas = Producto.objects.all()               
+                        lista_compras = Producto.objects.all()               
         else:
-                lista_ventas = Producto.objects.all() 
-                formVentas = forms.VentaForm()
-        return render(request, 'ventas.html', {'lista_ventas':lista_ventas , 'form' : formVentas})
+                lista_compras = Producto.objects.all() 
+                formCompras = forms.CompraForm()
+        return render(request, 'compras.html', {'lista_compras':lista_compras , 'form' : formCompras})
 
 def proveedores(request):
         if request.method == 'POST':
