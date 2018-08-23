@@ -15,9 +15,9 @@ def productos(request):
                         obj = Producto()
                         obj = formProductos.save(commit=False)
                         obj.save()       
-                        lista_productos = Producto.objects.all()               
+                        lista_productos = Producto.objects.all().order_by('Nombre')               
         else:
-                lista_productos = Producto.objects.all()
+                lista_productos = Producto.objects.all().order_by('Nombre')
                 formProductos = forms.ProductoForm()
         return render(request, 'productos.html', {'lista_productos':lista_productos , 'form' : formProductos})
 
@@ -30,7 +30,7 @@ def ventas(request):
                         obj.save()       
                         lista_ventas = Producto.objects.all()               
         else:
-                lista_ventas = Producto.objects.all()
+                lista_ventas = Producto.objects.all() 
                 formVentas = forms.VentaForm()
         return render(request, 'ventas.html', {'lista_ventas':lista_ventas , 'form' : formVentas})
 
@@ -41,9 +41,9 @@ def proveedores(request):
                         obj = Proveedor()
                         obj = formProveedores.save(commit=False)
                         obj.save()
-                        lista_proveedores = Proveedor.objects.all()
+                        lista_proveedores = Proveedor.objects.all().order_by('Nombre')
         else:
-                lista_proveedores = Proveedor.objects.all()
+                lista_proveedores = Proveedor.objects.all().order_by('Nombre')
                 formProveedores = forms.ProveedorForm()
         return render(request, 'proveedores.html', {'form':formProveedores, 'lista_proveedores':lista_proveedores})
 

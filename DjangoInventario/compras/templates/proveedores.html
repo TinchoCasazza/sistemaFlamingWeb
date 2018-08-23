@@ -42,6 +42,7 @@
                                                 <td>
                                                     {{ proveedor.Direccion }}                                                 </td> 
                                                 </td>
+                                                
                                             </tr>
                                             {% empty %}
                                                     <p>No hay proveedores cargados.</p> 
@@ -71,7 +72,7 @@
                 <form  method="post" action="." class="Alta-Producto-form">
                     {% csrf_token %}
                     {{ form.as_p }}
-                    <input type="submit" class="btn btn-primary" data-dismiss="modal" value="Agregar"></input>
+                    <input type="submit" class="btn btn-success" data-dismiss="modal" value="Agregar"></input>
                 </form>
             </div>
         </div>

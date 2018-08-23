@@ -42,7 +42,7 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+    <script type="text/javascript"  href="../static/DataTables/jquery.datatables.js"></script>
 </head>
 
 <body>
@@ -134,11 +134,6 @@
     <!-- /#page-wrapper -->
     
 </div>
-
-
-
-<!-- /#wrapper -->
-
     <!-- jQuery -->
     <script src="../static/vendor/jquery/jquery.min.js"></script>
 
@@ -159,8 +154,51 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/ju/dt-1.10.18/datatables.min.css"/>
  
     <script type="text/javascript" src="https://cdn.datatables.net/v/ju/dt-1.10.18/datatables.min.js"></script>
-    <script type="text/javascript" src="jquery.dataTables.js"></script>
-    
+
+<script>
+        $(document).ready(function() {
+            
+            $('#TableProductos').DataTable( {
+                "ordering": false,
+                "info": false,
+                "bLengthChange": false,
+                "bFilter": false,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+                }
+            });
+            
+            $("#buttonBorrar").hide();
+            $( "#TableProductos_paginate" ).add('');
+            
+            var table = $('#TableProductos').DataTable();
+
+            $('#TableProductos tbody').on( 'click', 'tr', function () {
+                $("#buttonBorrar").show(500);
+                if ( $(this).hasClass('selected') ) {
+                    $(this).removeClass('selected');
+                    $("#buttonBorrar").hide(500);
+                }
+                else {
+                    
+                    table.$('tr.selected').removeClass('selected');
+                    
+                    $(this).addClass('selected');
+                }
+            } );
+        
+            $('#buttonBorrar').click( function () {
+                table.row('.selected').remove().draw( false );
+                $("#buttonBorrar").hide(500);
+            } );
+        } );
+
+        function agregarFila(){ 
+            $("#myModal").modal();
+            
+        }  
+
+</script>
 
 </body>
 
