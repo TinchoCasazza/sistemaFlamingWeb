@@ -99,7 +99,7 @@
                     </li>
                     {% url 'productos_url' as productos %}
                     {% url 'proveedores_url' as proveedores %}
-                    {% url 'ventas_url' as ventas %}
+                    {% url 'compras_url' as compras %}
                     <li>                        
                         <a class="{% active request productos %}" href="{{ productos }}" style="font-family: Boogaloo; font-size:20px;"><i class="fas fa-box-open"></i></i> Productos</a>
                     </li>
@@ -119,7 +119,7 @@
                         <a class="{% active request proveedores %}" href="{{ proveedores }}" style="font-family: Boogaloo; font-size:20px;"><i class="fas fa-people-carry"></i></i> Proveedores</a>
                     </li>
                     <li>
-                        <a class="{% active request ventas %}" href="{{ ventas }}" style="font-family: Boogaloo; font-size:20px;"><i class="fa fa-shopping-cart fa-fw"></i> Ventas</a>
+                        <a class="{% active request compras %}" href="{{ compras }}" style="font-family: Boogaloo; font-size:20px;"><i class="fa fa-shopping-cart fa-fw"></i> Compras</a>
                     </li>
                 </ul>
             </div>

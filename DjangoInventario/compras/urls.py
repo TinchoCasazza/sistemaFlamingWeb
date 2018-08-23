@@ -10,6 +10,6 @@ urlpatterns = [
     url(r'productos/$', views.productos, name = 'productos_url'),
     url(r'producto_form/$', views.Alta_Producto, name = 'ProductoAlta_url'),
     url(r'proveedores/$', views.proveedores, name = 'proveedores_url'),
-    url(r'ventas/$', views.ventas, name = 'ventas_url'),
+    url(r'compras/$', views.compras, name = 'compras_url'),
 
 ]
