@@ -11,5 +11,4 @@ urlpatterns = [
     url(r'producto_form/$', views.Alta_Producto, name = 'ProductoAlta_url'),
     url(r'proveedores/$', views.proveedores, name = 'proveedores_url'),
     url(r'compras/$', views.viewcompras, name = 'compras_url'),
-
 ]
