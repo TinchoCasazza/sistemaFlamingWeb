@@ -1,5 +1,6 @@
 from django.shortcuts import render, render_to_response, redirect, get_object_or_404
 from .models import Producto
+from .models import ModelCompra
 from .models import Proveedor
 from . import forms
 # -*- coding: utf-8 -*-
@@ -21,18 +22,11 @@ def productos(request):
                 formProductos = forms.ProductoForm()
         return render(request, 'productos.html', {'lista_productos':lista_productos , 'form' : formProductos})
 
-def compras(request): 
-        if request.method == 'POST':
-                formCompras = forms.compraForm(request.POST)
-                if formCompras.is_valid():
-                        obj = compras()
-                        obj = formVentas.save(commit=False)
-                        obj.save()       
-                        lista_compras = Producto.objects.all()               
-        else:
-                lista_compras = Producto.objects.all() 
-                formCompras = forms.CompraForm()
-        return render(request, 'compras.html', {'lista_compras':lista_compras , 'form' : formCompras})
+def viewcompras(request): 
+        
+        lista_compras = ModelCompra.objects.all() 
+        formCompras = forms.CompraForm()
+        return render(request, 'compras_flaming.html', {'lista_compras':lista_compras})
 
 def proveedores(request):
         if request.method == 'POST':

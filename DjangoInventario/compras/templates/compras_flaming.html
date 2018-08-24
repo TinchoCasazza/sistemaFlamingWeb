@@ -1,11 +1,6 @@
-{% extends "base.html" %}} {% block contenido %}
-<div class="row">
-    <div class="col-lg-12">
-        <h3 class="page-header" style="font-family: Boogaloo; font-size: 25px;">PRODUCTOS:</h1>
-            <input id="buttonBorrar" class="btn btn-danger" type="button" style="visibility = hidden;" value="Eliminar"></input>
-    </div>
-    <!-- /.col-lg-12 -->
-</div>
+{% extends "base.html" %} 
+
+{% block contenido %}
 
 <div class="row">
     <div class="col-lg-12">
@@ -22,18 +17,20 @@
                         <table width="100%" class="display" id="TableProductos" role="grid" aria-describedby="dataTables-example_info" style="width: 100%;">
                             <thead>
                                 <tr>
-                                    <th>Nombre</th>
-                                    <th>Detalle</th>
-                                    <th>Venta</th>
+                                    <th>Producto</th>
+                                    <th>Stock Inicial</th>
+                                    <th>Compras</th>
+                                    <th>E. F.</th>
+                                    <th>Costo en U.</th>
+                                    <th>Precio</th>
                                     <th>Costo</th>
-                                    <th>Ganancia</th>
                                 </tr>
                             </thead>
                             <tbody id="tablaBody">
-                                {% for producto in lista_productos %}
+                                {% for compra in lista_compras %}
                                 <tr>
                                     <td>
-                                        {{ producto.Nombre }}
+                                        {{ compra.producto}}
                                     </td>
                                     <td>
                                         {{ producto.Detalle }}
@@ -62,27 +59,25 @@
             </div>
             <!-- /.col-lg-12 -->
 
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <h3 class="page-header" style="font-family: Boogaloo; font-size: 25px;">AGREGAR PRODUCTO:</h1>
+            {% endblock %}
+
+
+
+
+            <!-- <div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header" style="font-family: Boogaloo; font-size: 25px;">AGREGAR COMPRAS:</h1>
+    </div>
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            /.panel-heading 
+            <div class="panel-body">
+                <form  method="post" action="." class="Alta-Compras-form">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" class="btn btn-success" data-dismiss="modal" value="Agregar"></input>
+                </form>
             </div>
-            <div class="col-lg-12">
-                <div class="panel panel-default">
-                    <!-- /.panel-heading -->
-                    <div class="panel-body">
-                        <form method="post" action="." class="Alta-Producto-form">
-                            {% csrf_token %} {{ form.as_p }}
-                            <input type="submit" class="btn btn-success" data-dismiss="modal" value="Agregar"></input>
-                        </form>
-                    </div>
-                </div>
-            </div>
         </div>
-
-
-
-
-
-
-        {% endblock %}
+    </div>
+</div> -->

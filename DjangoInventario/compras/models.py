@@ -33,17 +33,23 @@ class Producto(models.Model):
 
     def calcularGanancia(self):
         return ( self.PrecioVenta - self.PrecioCosto )
+    
+    def save(self, **kwargs):
+        super(Producto, self).save(**kwargs)
+        compra = ModelCompra(producto=self)
+        compra.save()
 
 class TipoPago(models.Model):
     id = models.AutoField(primary_key=True)
     Tipo = models.CharField(max_length=20)
 
-class Compra(models.Model):
+class ModelCompra(models.Model):
     idCompra = models.AutoField(primary_key = True)
     producto = models.ForeignKey(Producto, on_delete=models.SET_NULL, null=True)
-    Compras = models.IntegerField()
-    ExistenciaFinal = models.IntegerField()
-    CostoUnidades = models.IntegerField()
-    Precio = models.DecimalField(max_digits=7, decimal_places=2)
-    Costo = models.DecimalField(max_digits=7, decimal_places=2)
+    Compras = models.IntegerField(default=0)
+    ExistenciaFinal = models.IntegerField(default=0)
+    CostoUnidades = models.IntegerField(default=0)
+    Precio = models.DecimalField(max_digits=7, decimal_places=2, default=0)
+    Costo = models.DecimalField(max_digits=7, decimal_places=2, default=0)
+
 
