@@ -48,10 +48,20 @@
 
 					<div class="wrap-input100 validate-input m-b-18" data-validate = "Contraseña es requerida">
 						<span class="label-input100">Contraseña</span>
-						<input class="input100" type="password" name="pass" placeholder="Ingrese Contraseña">
+						<input class="input100" type="password" name="password" placeholder="Ingrese Contraseña">
 						<span class="focus-input100"></span>
 					</div>
 
+					<div class="alert alert-danger">
+					{% if messages %}
+							<ul class="messages">
+								{% for message in messages %}
+								<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+								{% endfor %}
+							</ul>
+					{% endif %}
+					</div>
+	
 					<div class="flex-sb-m w-full p-b-30">
 						<div class="contact100-form-checkbox">
 							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">

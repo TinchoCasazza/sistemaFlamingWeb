@@ -115,3 +115,12 @@ STATICFILES_DIRS = (
 INTERNAL_IPS = "127.0.0.1"
 
 LOGIN_URL = reverse_lazy('login')
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
+
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.INFO: '',
+    50: 'critical',
+    
+}

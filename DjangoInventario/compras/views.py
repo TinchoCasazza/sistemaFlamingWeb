@@ -42,10 +42,29 @@ def proveedores(request):
         return render(request, 'proveedores.html', {'form':formProveedores, 'lista_proveedores':lista_proveedores})
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib import messages
 
 def Alta_Producto(request):
     formProductos = form.ProductoForm() # Bound form
     return render(request, 'producto_form.html', {'form': formProductos})
 
+
+from django.contrib.auth import authenticate, login
+
+CRITICAL = 50
+def login(request):
+        if request.method == 'POST':
+                username = request.POST['username']
+                password = request.POST['password']
+                user = authenticate(request, username=username, password=password)
+                if user is not None:
+                        return render(request, 'inicio.html', {})
+                else:
+                        messages.set_level(request, messages.WARNING)
+                        messages.add_message(request, CRITICAL, 'Datos Incorrectos.')
+                        return render(request, 'login.html' ,{'error': messages} )
+
+        else: 
+                return render(request, 'login.html' ,{} )
 
 
