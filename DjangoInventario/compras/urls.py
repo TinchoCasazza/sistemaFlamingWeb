@@ -3,7 +3,7 @@ from . import views
 from django.contrib.auth.views import login 
 
 # URLs del Modulo Compras 
-
+APPEND_SLASH = False
 urlpatterns = [
     url(r'^$', login, {'template_name':'login.html'}, name = 'login'),
     url(r'inicio/$', views.inicio, name = 'inicio_url'),
