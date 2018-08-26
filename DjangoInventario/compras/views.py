@@ -11,12 +11,20 @@ def inicio(request):
 
 def productos(request): 
         if request.method == 'POST':
-                formProductos = forms.ProductoForm(request.POST)
-                if formProductos.is_valid():
-                        obj = Producto()
-                        obj = formProductos.save(commit=False)
-                        obj.save()       
-                        lista_productos = Producto.objects.all().order_by('Nombre')               
+                if request.POST['IndiceBorrar'] > 0: 
+                        indice = request.POST['IndiceBorrar']
+                        productos = Producto.objects.all().order_by('Nombre')
+                        productos[int(indice)].delete()
+                        lista_productos = Producto.objects.all().order_by('Nombre') 
+                        formProductos = forms.ProductoForm() 
+                        return render(request, 'productos.html', {'lista_productos':lista_productos , 'form' : formProductos})
+                else:
+                        formProductos = forms.ProductoForm(request.POST)
+                        if formProductos.is_valid():
+                                obj = Producto()
+                                obj = formProductos.save(commit=False)
+                                obj.save()       
+                                lista_productos = Producto.objects.all().order_by('Nombre')               
         else:
                 lista_productos = Producto.objects.all().order_by('Nombre')
                 formProductos = forms.ProductoForm()
@@ -28,7 +36,7 @@ def viewcompras(request):
         formCompras = forms.CompraForm()
         return render(request, 'compras_flaming.html', {'lista_compras':lista_compras})
 
-def proveedores(request):
+def proveedores(request):        
         if request.method == 'POST':
                 formProveedores = forms.ProveedorForm(request.POST)
                 if formProveedores.is_valid():
@@ -66,5 +74,6 @@ def login(request):
 
         else: 
                 return render(request, 'login.html' ,{} )
+
 
 

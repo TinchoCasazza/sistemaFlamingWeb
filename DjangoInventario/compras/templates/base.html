@@ -160,6 +160,8 @@
     <script type="text/javascript" src="https://editor.datatables.net/extensions/Editor/js/dataTables.editor.min.js"></script>  
 <script>
     var editor;
+    var indiceBorrar = -1;
+    var accion = "";
     $(document).ready(function() {
             
             $('#TableProductos').DataTable( {
@@ -188,56 +190,26 @@
                     table.$('tr.selected').removeClass('selected');
                     
                     $(this).addClass('selected');
+                    indiceBorrar = this._DT_RowIndex;
+                    $("#IndiceBorrar").val(indiceBorrar);
                 }
             } );
         
             $('#buttonBorrar').click( function () {
                 table.row('.selected').remove().draw( false );
+                $("#IndiceBorrar").val(-1);
                 $("#buttonBorrar").hide(500);
             } );
 
-        editor = new $.fn.dataTable-editor.Editor( {
-        table: "#TableProductos",
-        fields: [ {
-                label: "Nombre:",
-                name: "nombre"
-            }, {
-                label: "Detalle:",
-                name: "detalle"
-            }, {
-                label: "Venta:",
-                name: "venta"
-            }, {
-                label: "Costo:",
-                name: "costo:",
-            }, {
-                label: "Ganancia:",
-                name: "ganancia"
-            }
-        ]
-    } );
- 
-    $('#TableProductos').DataTable( {
-        dom: "Bfrtip",
-        columns: [
-            { data: "nombre" },
-            { data: "detalle" },
-            { data: "venta" },
-            { data: "costo" },
-            { data: "ganancia"}
-        ],
-        select: true,
-        buttons: [
-            { extend: "create", editor: editor },
-            { extend: "edit",   editor: editor },
-            { extend: "remove", editor: editor }
-        ]
-    } );
+
         function agregarFila(){ 
             $("#myModal").modal();
             
         }  
+
  } );
+
+    
 
 </script>
 
