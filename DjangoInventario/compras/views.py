@@ -58,6 +58,7 @@ def Alta_Producto(request):
 
 
 from django.contrib.auth import authenticate, login
+from django.contrib.auth import login as auth_login
 
 CRITICAL = 50
 def login(request):
@@ -65,6 +66,7 @@ def login(request):
                 username = request.POST['username']
                 password = request.POST['password']
                 user = authenticate(request, username=username, password=password)
+                auth_login(request , user)
                 if user is not None:
                         return render(request, 'inicio.html', {})
                 else:
