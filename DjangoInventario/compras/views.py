@@ -1,9 +1,12 @@
 from django.shortcuts import render, render_to_response, redirect, get_object_or_404
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import Producto
 from .models import ModelCompra
 from .models import Proveedor
 from . import forms
+from django.contrib.auth.views import login, logout
 # -*- coding: utf-8 -*-
+# coding: utf-8
 # Create your views here.
 
 def inicio(request):
@@ -62,20 +65,24 @@ from django.contrib.auth import login as auth_login
 
 CRITICAL = 50
 def login(request):
-        if request.method == 'POST':
-                username = request.POST['username']
-                password = request.POST['password']
-                user = authenticate(request, username=username, password=password)
-                auth_login(request , user)
-                if user is not None:
-                        return render(request, 'inicio.html', {})
-                else:
-                        messages.set_level(request, messages.WARNING)
-                        messages.add_message(request, CRITICAL, 'Datos Incorrectos.')
-                        return render(request, 'login.html' ,{'error': messages} )
+        if request.user.is_authenticated():
+                return HttpResponseRedirect('inicio/')
+        else:
+                if request.method == 'POST':
+                        username = request.POST['username']
+                        password = request.POST['password']
+                        user = authenticate(request, username=username, password=password)
+                        if user is not None:
+                                auth_login(request , user)
+                                return render(request, 'inicio.html', {})
+                        else:
+                                messages.set_level(request, messages.WARNING)
+                                messages.add_message(request, CRITICAL, u'Usuario o Contrase\xf1a incorrectos.')
+                                return render(request, 'login.html' , {'error': messages} )
+                else: 
+                        return render(request, 'login.html' ,{} )
 
-        else: 
-                return render(request, 'login.html' ,{} )
-
+def logout(request):
+    logout(request)
 
 

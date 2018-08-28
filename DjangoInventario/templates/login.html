@@ -51,18 +51,16 @@
 						<input class="input100" type="password" name="password" placeholder="Ingrese Contraseña">
 						<span class="focus-input100"></span>
 					</div>
-
-					<div class="alert alert-danger">
 					{% if messages %}
+					<div class="alert alert-danger">
 							<ul class="messages">
 								{% for message in messages %}
-								<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+								<li>{% if message.tags %}{% endif %}{{ message }}</li>
 								{% endfor %}
 							</ul>
-					{% endif %}
 					</div>
-	
-					<div class="flex-sb-m w-full p-b-30">
+					{% endif %}
+					<div class="flex-sb-m w-full p-b-30" hidden="True">
 						<div class="contact100-form-checkbox">
 							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
 							<label class="label-checkbox100" for="ckb1">

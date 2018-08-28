@@ -33,14 +33,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    'compras',
+    'django_sb_admin',  
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django_sb_admin',
-    'compras',
+    'django.contrib.staticfiles', 
     'debug_toolbar'
 )
 
@@ -54,6 +54,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'inventario.middleware.SessionIdleTimeout',
 )
 
 ROOT_URLCONF = 'inventario.urls'
@@ -114,6 +115,8 @@ STATICFILES_DIRS = (
 INTERNAL_IPS = "127.0.0.1"
 
 LOGIN_URL = reverse_lazy('login')
+LOGIN_REDIRECT_URL = reverse_lazy('login')
+LOGOUT_REDIRECT_URL = '/'
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
@@ -123,3 +126,9 @@ MESSAGE_TAGS = {
     50: 'critical',
     
 }
+
+TIME= 5*60  
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+SESSION_EXPIRE_AT_BROWSER_CLOSE= True
+SESSION_COOKIE_AGE = TIME    
+SESSION_IDLE_TIMEOUT = TIME  
