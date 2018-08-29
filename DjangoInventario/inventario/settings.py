@@ -114,8 +114,8 @@ STATICFILES_DIRS = (
 
 INTERNAL_IPS = "127.0.0.1"
 
-LOGIN_URL = reverse_lazy('login')
-LOGIN_REDIRECT_URL = reverse_lazy('login')
+LOGIN_URL = '/'
+LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
@@ -127,7 +127,7 @@ MESSAGE_TAGS = {
     
 }
 
-TIME= 5*60  
+TIME= 240*60
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 SESSION_EXPIRE_AT_BROWSER_CLOSE= True
 SESSION_COOKIE_AGE = TIME    

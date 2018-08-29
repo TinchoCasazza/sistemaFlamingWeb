@@ -19,6 +19,7 @@ def productos(request):
                         productos = Producto.objects.all().order_by('Nombre')
                         productos[int(indice)].delete()
                         lista_productos = Producto.objects.all().order_by('Nombre') 
+
                         formProductos = forms.ProductoForm() 
                         return render(request, 'productos.html', {'lista_productos':lista_productos , 'form' : formProductos})
                 else:
