@@ -71,11 +71,11 @@
                 <ul class="dropdown-menu dropdown-user">
                     <li><a href="#" style="font-family: Boogaloo;"><i class="fa fa-user fa-fw"></i> 
                     {% if user.is_authenticated %}
-                        {{ user.username }}
+                        {{ user.username|title }}
                     {% endif %}
                     </a></li>
-                    <li><a href="#" style="font-family: Boogaloo;"><i class="fa fa-gear fa-fw"></i> Configuraciones</a>
-                    </li>
+                   <!-- <li><a href="#" style="font-family: Boogaloo;"><i class="fa fa-gear fa-fw"></i> Configuraciones</a>
+                    </li> -->
                     <li class="divider"></li>
                     <li><a href="{% url 'logout' %}?next=/" style="font-family: Boogaloo;"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
                     </li>
@@ -103,6 +103,9 @@
                         <a class="{% active request productos %}" href="{{ productos }}" style="font-family: Boogaloo; font-size:20px;"><i class="fas fa-box-open"></i></i> Productos</a>
                     </li>
                     <li>
+                        <a class="{% active request compras %}" href="{{ compras }}" style="font-family: Boogaloo; font-size:20px;"><i class="fa fa-shopping-cart fa-fw"></i> Compras</a>
+                    </li>
+                   <!-- <li>
                         <a href="#" style="font-family: Boogaloo; font-size:20px;" ><i class="fa fa-bar-chart-o fa-fw"></i> Ventas<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
@@ -112,13 +115,10 @@
                                 <a href="morris.html" style="font-family: Boogaloo; font-size:20px;">Mensuales</a>
                             </li>
                         </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
+                        /.nav-second-level 
+                    </li> -->
                     <li>
                         <a class="{% active request proveedores %}" href="{{ proveedores }}" style="font-family: Boogaloo; font-size:20px;"><i class="fas fa-people-carry"></i></i> Proveedores</a>
-                    </li>
-                    <li>
-                        <a class="{% active request compras %}" href="{{ compras }}" style="font-family: Boogaloo; font-size:20px;"><i class="fa fa-shopping-cart fa-fw"></i> Compras</a>
                     </li>
                 </ul>
             </div>
@@ -173,16 +173,18 @@
                 }
             });
             
-            $("#buttonBorrar").hide();
+            $('#buttonBorrar').addClass('btn btn-danger disabled');
             $( "#TableProductos_paginate" ).add('');
             
             var table = $('#TableProductos').DataTable();
 
             $('#TableProductos tbody').on( 'click', 'tr', function () {
-                $("#buttonBorrar").show(500);
+                $('#buttonBorrar').removeClass('btn btn-danger disabled');
+                $('#buttonBorrar').addClass('btn btn-danger');
                 if ( $(this).hasClass('selected') ) {
                     $(this).removeClass('selected');
-                    $("#buttonBorrar").hide(500);
+                    $('#buttonBorrar').removeClass('btn btn-danger');
+                    $('#buttonBorrar').addClass('btn btn-danger disabled');
                 }
                 else {
                     
@@ -197,7 +199,8 @@
             $('#buttonBorrar').click( function () {
                 table.row('.selected').remove().draw( false );
                 $("#IndiceBorrar").val(-1);
-                $("#buttonBorrar").hide(500);
+                $('#buttonBorrar').removeClass('btn btn-danger');
+                $('#buttonBorrar').addClass('btn btn-danger disabled');
             } );
 
             $("#myBtn").click(function(){
