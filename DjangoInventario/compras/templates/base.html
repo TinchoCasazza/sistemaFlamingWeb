@@ -159,7 +159,7 @@
     <script type="text/javascript" src="https://editor.datatables.net/extensions/Editor/js/dataTables.editor.min.js"></script>  
 <script>
     var editor;
-    var indiceBorrar = -1;
+    var borrarDato = "";
     var accion = "";
     $(document).ready(function() {
             
@@ -189,18 +189,17 @@
                 else {
                     
                     table.$('tr.selected').removeClass('selected');
-                    
+                    borrarDato = this.cells[0].innerText;
                     $(this).addClass('selected');
-                    indiceBorrar = this._DT_RowIndex;
-                    $("#IndiceBorrar").val(indiceBorrar);
                 }
             } );
         
             $('#buttonBorrar').click( function () {
                 table.row('.selected').remove().draw( false );
-                $("#IndiceBorrar").val(-1);
+
                 $('#buttonBorrar').removeClass('btn btn-danger');
                 $('#buttonBorrar').addClass('btn btn-danger disabled');
+                console.log("Borraste " + borrarDato);
             } );
 
             $("#myBtn").click(function(){
