@@ -1,13 +1,15 @@
 {% extends "base.html" %}} {% block contenido %}
-<div class="row">
-    <div class="col-lg-12">
-        <h3 class="page-header" style="font-family: Boogaloo; font-size: 25px;">PRODUCTOS:</h1>
-        <form  method="POST">
-            {% csrf_token %}
+<div class="row ">
+    <div class="col-xs-12 page-header">
+        <div class="col-xs-8">
+            <h1 style="font-family: Boogaloo; font-size: 25px;">PRODUCTOS:</h1>
+        </div>
+     <!-- /.col-lg-10 -->
+        <div class="col-xs-4" style="margin-top: 15px; text-align: right;">
+            <button type="button" class="btn btn-primary" id="bottonEditar">Editar</button>
             <input id="buttonBorrar" type="submit" value="Eliminar"></input>
-            <input id="IndiceBorrar" name="IndiceBorrar" style="visibility = hidden;" type="input" value="0"></input>
-        </form>    
-        <button type="button" class="btn btn-primary" id="myBtn">Nuevo</button>
+            <button type="button" class="btn btn-success" id="myBtn">Nuevo</button>
+        </div>
     </div>
     <!-- /.col-lg-12 -->
 </div>
@@ -23,11 +25,11 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <table width="100%" class="display" id="TableProductos" role="grid" aria-describedby="dataTables-example_info" style="width: 100%;">
+                        <table width="100%" class="table table-bordered dataTable no-footer dtr-inline" id="TableProductos" role="grid" aria-describedby="dataTables-example_info" style="width: 100%;">
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
-                                    <th>Detalle</th>
+                                    <th>Categoría</th>
                                     <th>Venta</th>
                                     <th>Costo</th>
                                     <th>Ganancia</th>
