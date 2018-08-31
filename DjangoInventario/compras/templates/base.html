@@ -2,7 +2,16 @@
 {% load static %}
 {% load menu %}
 <html lang="es">
-
+<style>
+    .fondoFlaming {
+        width: 65%;
+        height: 80%;
+        position: fixed;
+        top: 14%;
+        left: 27%;
+        z-index: 50; /* puts image into the background */
+        }
+</style>
 <head>
 
     <meta charset="utf-8">
@@ -48,7 +57,7 @@
 <body>
 
 <div id="wrapper">
-
+    
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
@@ -128,7 +137,9 @@
     </nav>
 
     <div id="page-wrapper">
-       {% block contenido %}{% endblock %}
+       {% block contenido %}
+            
+       {% endblock %}
     </div>
     <!-- /#page-wrapper -->
     
