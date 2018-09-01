@@ -10,7 +10,6 @@ urlpatterns = [
     url(r'^logout/$', logout, name='logout'),
     url(r'inicio/$', login_required(views.inicio), name = 'inicio_url'),
     url(r'productos/$', login_required(views.productos), name = 'productos_url'),
-    url(r'producto_form/$', login_required(views.Alta_Producto), name = 'ProductoAlta_url'),
     url(r'proveedores/$', login_required(views.proveedores), name = 'proveedores_url'),
     url(r'compras/$', login_required(views.viewcompras), name = 'compras_url'),
 ]

@@ -8,31 +8,25 @@ from django.contrib.auth.views import login, logout
 # -*- coding: utf-8 -*-
 # coding: utf-8
 # Create your views here.
+from django.views.decorators.csrf import csrf_protect
+
 
 def inicio(request):
         return render(request, 'inicio.html', {})
-
+@csrf_protect
 def productos(request): 
         if request.method == 'POST':
-                if request.POST['IndiceBorrar'] > 0: 
-                        indice = request.POST['IndiceBorrar']
-                        productos = Producto.objects.all().order_by('Nombre')
-                        productos[int(indice)].delete()
-                        lista_productos = Producto.objects.all().order_by('Nombre') 
-
-                        formProductos = forms.ProductoForm() 
-                        return render(request, 'productos.html', {'lista_productos':lista_productos , 'form' : formProductos})
-                else:
-                        formProductos = forms.ProductoForm(request.POST)
-                        if formProductos.is_valid():
-                                obj = Producto()
-                                obj = formProductos.save(commit=False)
-                                obj.save()       
-                                lista_productos = Producto.objects.all().order_by('Nombre')               
+                formProductos = forms.ProductoForm(request.POST)
+                if formProductos.is_valid():
+                        obj = Producto()
+                        obj = formProductos.save(commit=False)
+                        obj.save()       
+                        lista_productos = Producto.objects.all().order_by('Nombre')               
         else:
                 lista_productos = Producto.objects.all().order_by('Nombre')
                 formProductos = forms.ProductoForm()
-        return render(request, 'productos.html', {'lista_productos':lista_productos , 'form' : formProductos})
+        return render(request, 'productos.html', {'lista_productos': lista_productos , 'form' : formProductos})
+
 
 def viewcompras(request): 
         
