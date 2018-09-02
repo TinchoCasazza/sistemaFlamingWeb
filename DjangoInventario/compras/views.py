@@ -25,8 +25,17 @@ def productos(request):
         else:
                 lista_productos = Producto.objects.all().order_by('Nombre')
                 formProductos = forms.ProductoForm()
-        return render(request, 'productos.html', {'lista_productos': lista_productos , 'form' : formProductos})
+        return render(request, 'productos.html', {'lista_productos':lista_productos , 'form' : formProductos})
 
+def productos_eliminar(request):
+        if request.method == 'POST': 
+                import pdb; pdb.set_trace()
+                indice = request.POST['IndiceBorrar']
+                productos = Producto.objects.all().order_by('Nombre')
+                productos[int(indice)].delete()
+                lista_productos = Producto.objects.all().order_by('Nombre') 
+                formProductos = forms.ProductoForm() 
+                return render(request, 'productos.html', {'lista_productos':lista_productos , 'form' : formProductos})
 
 def viewcompras(request): 
         

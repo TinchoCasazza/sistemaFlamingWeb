@@ -172,8 +172,7 @@
     var editor;
     var borrarDato = "";
     var accion = "";
-    $(document).ready(function() {
-            
+    $(document).ready(function() {           
             $('#TableProductos').DataTable( {
                 "ordering": false,
                 "info": false,
@@ -206,8 +205,21 @@
             } );
         
             $('#buttonBorrar').click( function () {
+                var pdata = table.row('.selected').data()
+                console.log(pdata)
                 table.row('.selected').remove().draw( false );
-
+                $.ajax({
+                    type: 'POST',
+                    url: '/productos/eliminar_producto/',
+                    data: pdata,
+                    success: function (data) {
+                        console.log(data)
+                        $('TableProductos').draw();
+                    },
+                    error: function(data) {
+                        console.log(data)
+                    }
+                });
                 $('#buttonBorrar').removeClass('btn btn-danger');
                 $('#buttonBorrar').addClass('btn btn-danger disabled');
                 console.log("Borraste " + borrarDato);
@@ -267,12 +279,12 @@
                     }
                 }
             });
-
     } );
     
 
    
 </script>
+
 
 </body>
 
