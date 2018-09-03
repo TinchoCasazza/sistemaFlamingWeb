@@ -6,6 +6,7 @@ class ProductoForm(ModelForm):
     class Meta:
         model = Producto
         fields = "__all__"
+    
 
 class ProveedorForm(ModelForm):
     class Meta:

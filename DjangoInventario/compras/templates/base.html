@@ -213,8 +213,8 @@
             $('#EditarProductoBtn').click( function () {
                 var pdata = table.row('.selected').data()
                 $('form input[name$="Nombre"]').val(pdata[1]),
-                $('form input[name$="Detalle"]').val(pdata[2]),
-                $('form input[name$="Cantidad"]').val("0"),
+                $('form input[name$="Cantidad"]').val(pdata[2]),
+                $('form input[name$="Cantidad"]').prop('disabled', true);
                 $('form input[name$="PrecioVenta"]').val(parseFloat(pdata[3])),
                 $('form input[name$="PrecioCosto"]').val(parseFloat(pdata[4])),
                 $('input:hidden[name=PK]').val(pdata[0])
