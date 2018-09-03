@@ -29,12 +29,13 @@ def productos(request):
         return render(request, 'productos.html', {'lista_productos':lista_productos , 'form' : formProductos})
 
 def productos_eliminar(request):
-        if request.method == 'POST': 
+        if request.method == 'POST':        
                 indice = request.POST['indice']
                 productos = Producto.objects.all().order_by('Nombre')
                 productos[int(indice)].delete()
                 lista_productos = Producto.objects.all().order_by('Nombre') 
                 formProductos = forms.ProductoForm() 
+               
                 return render(request, 'productos.html', {'lista_productos':lista_productos , 'form' : formProductos})
 
 def productos_editar(request):
@@ -49,8 +50,7 @@ def productos_editar(request):
         
 
 def viewcompras(request): 
-        
-        lista_compras = ModelCompra.objects.all() 
+        lista_compras = ModelCompra.objects.all().exclude(producto = None)
         formCompras = forms.CompraForm()
         return render(request, 'compras_flaming.html', {'lista_compras':lista_compras})
 

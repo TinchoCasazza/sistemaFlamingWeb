@@ -220,6 +220,10 @@
                 $('input:hidden[name=PK]').val(pdata[0])
                 console.log(pdata)
             } );
+
+            $('#AltaProductoBtn').click( function () {
+                $('form input[name$="Cantidad"]').prop('disabled', true);
+            } );
         
             $('#buttonBorrar').click( function () {
                 var pdata = table.row('.selected').indexes()[0]
