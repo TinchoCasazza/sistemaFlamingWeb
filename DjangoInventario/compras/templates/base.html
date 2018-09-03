@@ -184,6 +184,7 @@
             });
             
             $('#buttonBorrar').addClass('btn btn-danger disabled');
+            $('#EditarProductoBtn').addClass('btn btn-primary disabled');
             $( "#TableProductos_paginate" ).add('');
             
             var table = $('#TableProductos').DataTable();
@@ -191,10 +192,14 @@
             $('#TableProductos tbody').on( 'click', 'tr', function () {
                 $('#buttonBorrar').removeClass('btn btn-danger disabled');
                 $('#buttonBorrar').addClass('btn btn-danger');
+                $('#EditarProductoBtn').removeClass('btn btn-primary disabled');
+                $('#EditarProductoBtn').addClass('btn btn-primary');
                 if ( $(this).hasClass('selected') ) {
                     $(this).removeClass('selected');
                     $('#buttonBorrar').removeClass('btn btn-danger');
                     $('#buttonBorrar').addClass('btn btn-danger disabled');
+                    $('#EditarProductoBtn').removeClass('btn btn-primary');
+                    $('#EditarProductoBtn').addClass('btn btn-primary disabled');
                 }
                 else {
                     
@@ -203,15 +208,25 @@
                     $(this).addClass('selected');
                 }
             } );
+
+            $('#EditarProductoBtn').click( function () {
+                var pdata = table.row('.selected').data()
+                $('form input[name$="Nombre"]').val(pdata[0]),
+                $('form input[name$="Detalle"]').val(pdata[1]),
+                $('form input[name$="Cantidad"]').val("0"),
+                $('form input[name$="PrecioVenta"]').val(parseFloat(pdata[2])),
+                $('form input[name$="PrecioCosto"]').val(parseFloat(pdata[3])),
+                console.log(pdata)
+            } );
         
             $('#buttonBorrar').click( function () {
-                var pdata = table.row('.selected').data()
+                var pdata = table.row('.selected').indexes()[0]
                 console.log(pdata)
                 table.row('.selected').remove().draw( false );
                 $.ajax({
                     type: 'POST',
                     url: '/productos/eliminar_producto/',
-                    data: pdata,
+                    data: { "indice" : pdata },
                     success: function (data) {
                         console.log(data)
                         $('TableProductos').draw();
@@ -225,10 +240,14 @@
                 console.log("Borraste " + borrarDato);
             } );
 
-            $("#myBtn").click(function(){
-                $("#myModal").modal();
+            $("#AltaProductoBtn").click(function(){
+                $("#AltaProductoModal").modal();
             });
 
+            $("#EditarProductoBtn").click(function(){
+                $("#EditarProductoModal").modal();
+            });
+            
             $.ajaxSetup({ 
                 beforeSend: function(xhr, settings) {
                     function getCookie(name) {

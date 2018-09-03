@@ -29,13 +29,25 @@ def productos(request):
 
 def productos_eliminar(request):
         if request.method == 'POST': 
-                import pdb; pdb.set_trace()
-                indice = request.POST['IndiceBorrar']
+                indice = request.POST['indice']
                 productos = Producto.objects.all().order_by('Nombre')
                 productos[int(indice)].delete()
                 lista_productos = Producto.objects.all().order_by('Nombre') 
                 formProductos = forms.ProductoForm() 
                 return render(request, 'productos.html', {'lista_productos':lista_productos , 'form' : formProductos})
+
+def productos_editar(request):
+        if request.method == 'POST':
+                import pdb; pdb.set_trace()
+                get_producto = ProductoForm.objects.filter(Nombre = request.POST['Nombre'])
+                formProductos = forms.ProductoForm(request.POST)
+                if formProductos.is_valid():
+                        obj = Producto()
+                        obj = formProductos.save(commit=False)
+                        obj.save()       
+                        lista_productos = Producto.objects.all().order_by('Nombre')    
+        return render(request, 'productos.html', {'lista_productos':lista_productos , 'form' : formProductos})        
+        
 
 def viewcompras(request): 
         

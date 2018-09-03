@@ -15,9 +15,9 @@
             </div>
 
             <div class="col-xs-4" style="margin-top: 15px; text-align: right;">
-                <button type="button" class="btn btn-primary" id="bottonEditar">Editar</button>
+                <button type="button" class="btn btn-primary" id="EditarProductoBtn">Editar</button>
                 <button type="button" id="buttonBorrar">Eliminar</button>
-                <button type="button" class="btn btn-success" id="myBtn">Nuevo</button>
+                <button type="button" class="btn btn-success" id="AltaProductoBtn">Nuevo</button>
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
@@ -32,9 +32,9 @@
                                 <tr>
                                     <th>Nombre</th>
                                     <th>Categoría</th>
-                                    <th>Venta</th>
-                                    <th>Costo</th>
-                                    <th>Ganancia</th>
+                                    <th>Venta ($)</th>
+                                    <th>Costo ($)</th>
+                                    <th>Ganancia ($)</th>
                                 </tr>
                             </thead>
                             <tbody id="tablaBody">
@@ -47,13 +47,13 @@
                                         {{ producto.Detalle }}
                                     </td>
                                     <td>
-                                        ${{ producto.PrecioVenta }}
+                                        {{ producto.PrecioVenta }}
                                     </td>
                                     <td>
-                                        ${{ producto.PrecioCosto }} </td>
+                                        {{ producto.PrecioCosto }} </td>
                                     </td>
                                     <td>
-                                        ${{ producto.calcularGanancia }}
+                                        {{ producto.calcularGanancia }}
                                     </td>
                                 </tr>
                                 {% empty %}
@@ -73,8 +73,8 @@
         </div>
 
 
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" role="dialog">
+        <!-- Modal Alta-->
+        <div class="modal fade" id="AltaProductoModal" role="dialog">
             <div class="modal-dialog">
             
             <!-- Modal content-->
@@ -95,7 +95,31 @@
                 </div>
             
             </div>
-        </div>       
+        </div>    
+        
+        <!-- Modal Editar-->
+        <div class="modal fade" id="EditarProductoModal" role="dialog">
+            <div class="modal-dialog">
+                    
+            <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        
+                    <h4 class="modal-title" style="font-family: Boogaloo; font-size: 22px;">Editar Producto</h4>
+                    </div>
+                    <div class="modal-body">
+                    <form method="POST" action="/productos/" id="editarProducto">
+                        {% csrf_token %} {{ form.as_p }}
+                    </form>
+                    </div>
+                        <div class="modal-footer">
+                            <button type="submit" id="bttn_producto" class="btn btn-success" data-dismiss="modal" onclick="editarProducto()" value="Agregar">Guardar</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        </div>
+                </div>
+                    
+            </div>
+        </div>     
     </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -105,6 +129,20 @@ function altaProducto() {
     $.ajax({
         type: 'POST',
         url: '/productos/',
+        data: pdata,
+        success: function (data) {
+            $('TableProductos').draw();
+        },
+        error: function(data) {
+        }
+    });
+};
+
+function editarProducto() {
+    var pdata = $('#editarProducto').serialize();
+    $.ajax({
+        type: 'POST',
+        url: '/productos/editar_producto/',
         data: pdata,
         success: function (data) {
             $('TableProductos').draw();
