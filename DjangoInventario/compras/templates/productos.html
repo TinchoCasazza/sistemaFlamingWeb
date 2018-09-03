@@ -145,15 +145,17 @@ function altaProducto() {
 
 function editarProducto() {
     var pdata = $('#editarProducto').serialize();
+    
     $.ajax({
         type: 'POST',
         url: '/productos/editar_producto/',
         data: pdata, 
         success: function (data) {
+            window.location.href = '/productos/'; 
         },
         error: function(data) {
         }
-    });
+    })
 };
 </script>
 <style>
