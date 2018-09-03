@@ -27,6 +27,7 @@ class Producto(models.Model):
     Cantidad = models.IntegerField(blank= True, null = True)
     PrecioVenta = models.DecimalField(max_digits=7, decimal_places=2)
     PrecioCosto = models.DecimalField(max_digits=7, decimal_places=2)
+    objects = models.Manager()
 
     def __str__(self):
         return self.Nombre

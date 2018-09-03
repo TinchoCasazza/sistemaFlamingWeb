@@ -4,6 +4,7 @@ from .models import Producto
 from .models import ModelCompra
 from .models import Proveedor
 from . import forms
+from forms import ProductoForm
 from django.contrib.auth.views import login, logout
 # -*- coding: utf-8 -*-
 # coding: utf-8
@@ -21,7 +22,7 @@ def productos(request):
                         obj = Producto()
                         obj = formProductos.save(commit=False)
                         obj.save()       
-                        lista_productos = Producto.objects.all().order_by('Nombre')               
+                        lista_productos = Producto.objects.all().order_by('Nombre')     
         else:
                 lista_productos = Producto.objects.all().order_by('Nombre')
                 formProductos = forms.ProductoForm()
@@ -38,13 +39,11 @@ def productos_eliminar(request):
 
 def productos_editar(request):
         if request.method == 'POST':
-                import pdb; pdb.set_trace()
-                get_producto = ProductoForm.objects.filter(Nombre = request.POST['Nombre'])
                 formProductos = forms.ProductoForm(request.POST)
                 if formProductos.is_valid():
-                        obj = Producto()
-                        obj = formProductos.save(commit=False)
-                        obj.save()       
+                        get_producto = Producto.objects.get(id = request.POST['PK'])
+                        formProductos = forms.ProductoForm(request.POST, instance = get_producto)
+                        formProductos.save()
                         lista_productos = Producto.objects.all().order_by('Nombre')    
         return render(request, 'productos.html', {'lista_productos':lista_productos , 'form' : formProductos})        
         

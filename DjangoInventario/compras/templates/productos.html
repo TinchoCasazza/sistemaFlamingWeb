@@ -114,6 +114,7 @@
                     <div class="modal-body">
                     <form method="POST" action="/productos/" id="editarProducto">
                         {% csrf_token %} {{ form.as_p }}
+                        <input type="hidden" name="PK" id="id_pk" maxlength="50">
                     </form>
                     </div>
                         <div class="modal-footer">
@@ -130,12 +131,12 @@
 <script type="text/javascript">
 function altaProducto() {
     var pdata = $('#nuevoProducto').serialize();
+    var pk = $('#id_pk').val().serialize();
     $.ajax({
         type: 'POST',
         url: '/productos/',
-        data: pdata,
+        data: {'info' : pdata, 'pk' : pk },
         success: function (data) {
-            $('TableProductos').draw();
         },
         error: function(data) {
         }
@@ -147,9 +148,8 @@ function editarProducto() {
     $.ajax({
         type: 'POST',
         url: '/productos/editar_producto/',
-        data: pdata,
+        data: pdata, 
         success: function (data) {
-            $('TableProductos').draw();
         },
         error: function(data) {
         }
