@@ -30,6 +30,7 @@
                         <table width="100%" class="table table-bordered dataTable no-footer dtr-inline" id="TableProductos" role="grid" aria-describedby="dataTables-example_info" style="width: 100%;">
                             <thead>
                                 <tr>
+                                    <th>id</th>
                                     <th>Nombre</th>
                                     <th>Categoría</th>
                                     <th>Venta ($)</th>
@@ -40,6 +41,9 @@
                             <tbody id="tablaBody">
                                 {% for producto in lista_productos %}
                                 <tr>
+                                    <td>
+                                        {{ producto.id }}
+                                    </td>
                                     <td>
                                         {{ producto.Nombre }}
                                     </td>

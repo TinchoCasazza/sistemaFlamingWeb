@@ -5,7 +5,7 @@ from .models import Producto,ModelCompra,Proveedor
 class ProductoForm(ModelForm):
     class Meta:
         model = Producto
-        exclude = ['id']
+        fields = "__all__"
 
 class ProveedorForm(ModelForm):
     class Meta:
