@@ -1,12 +1,25 @@
 {% extends "base.html" %} 
 
 {% block contenido %}
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header" style="font-family: Boogaloo; font-size: 25px;">COMPRAS:</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
 
 <div class="row">
     <div class="col-lg-12">
-
         <div class="panel panel-default">
-            <!-- /.panel-heading -->
+            <div class="col-xs-8">
+            </div>
+
+            <div class="col-xs-4" style="margin-top: 15px; text-align: right;">
+                <button type="button" class="btn btn-primary" id="EditarProductoBtn">Editar</button>
+                <button type="button" id="buttonBorrar">Eliminar</button>
+                <button type="button" class="btn btn-success" id="AltaProductoBtn">Nuevo</button>
+            </div>
+
             <div class="panel-body">
                 <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
                     <div class="col-sm-8">
@@ -63,21 +76,3 @@
 
 
 
-
-            <!-- <div class="row">
-    <div class="col-lg-12">
-        <h3 class="page-header" style="font-family: Boogaloo; font-size: 25px;">AGREGAR COMPRAS:</h1>
-    </div>
-    <div class="col-lg-12">
-        <div class="panel panel-default">
-            /.panel-heading 
-            <div class="panel-body">
-                <form  method="post" action="." class="Alta-Compras-form">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <input type="submit" class="btn btn-success" data-dismiss="modal" value="Agregar"></input>
-                </form>
-            </div>
-        </div>
-    </div>
-</div> -->
