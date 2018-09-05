@@ -168,92 +168,26 @@
     <script type="text/javascript" src="https://cdn.datatables.net/select/1.2.6/js/dataTables.select.min.js"></script>
     
     <script type="text/javascript" src="https://editor.datatables.net/extensions/Editor/js/dataTables.editor.min.js"></script>  
-<script>
+<script type="text/javascript">
     var editor;
     var borrarDato = "";
     var accion = "";
+
+function formatoTabla(idTabla) {
+    $('#' + idTabla).DataTable( {
+        "ordering": false,
+        "info": false,
+        "bLengthChange": false,
+        "bFilter": false,
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+        },
+        "aoColumnDefs": [{ "bVisible": false, "aTargets": [0] }]
+    });
+}
+
     $(document).ready(function() {           
-            $('#TableProductos').DataTable( {
-                "ordering": false,
-                "info": false,
-                "bLengthChange": false,
-                "bFilter": false,
-                "language": {
-                    "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
-                },
-                "aoColumnDefs": [{ "bVisible": false, "aTargets": [0] }]
-            });
 
-            $('#buttonBorrar').addClass('btn btn-danger disabled');
-            $('#EditarProductoBtn').addClass('btn btn-primary disabled');
-            $( "#TableProductos_paginate" ).add('');
-            
-            var table = $('#TableProductos').DataTable();
-
-            $('#TableProductos tbody').on( 'click', 'tr', function () {
-                $('#buttonBorrar').removeClass('btn btn-danger disabled');
-                $('#buttonBorrar').addClass('btn btn-danger');
-                $('#EditarProductoBtn').removeClass('btn btn-primary disabled');
-                $('#EditarProductoBtn').addClass('btn btn-primary');
-                if ( $(this).hasClass('selected') ) {
-                    $(this).removeClass('selected');
-                    $('#buttonBorrar').removeClass('btn btn-danger');
-                    $('#buttonBorrar').addClass('btn btn-danger disabled');
-                    $('#EditarProductoBtn').removeClass('btn btn-primary');
-                    $('#EditarProductoBtn').addClass('btn btn-primary disabled');
-                }
-                else {
-                    
-                    table.$('tr.selected').removeClass('selected');
-                    borrarDato = this.cells[0].innerText;
-                    $(this).addClass('selected');
-                }
-            } );
-
-            $('#EditarProductoBtn').click( function () {
-                var pdata = table.row('.selected').data()
-                $('form input[name$="Nombre"]').val(pdata[1]),
-                $('form input[name$="Cantidad"]').val(pdata[2]),
-                $('form input[name$="Cantidad"]').prop('disabled', true);
-                $('form input[name$="PrecioVenta"]').val(parseFloat(pdata[3])),
-                $('form input[name$="PrecioCosto"]').val(parseFloat(pdata[4])),
-                $('input:hidden[name=PK]').val(pdata[0])
-                console.log(pdata)
-            } );
-
-            $('#AltaProductoBtn').click( function () {
-                $('form input[name$="Cantidad"]').prop('disabled', true);
-            } );
-        
-            $('#buttonBorrar').click( function () {
-                var pdata = table.row('.selected').indexes()[0]
-                console.log(pdata)
-                table.row('.selected').remove().draw( false );
-                $.ajax({
-                    type: 'POST',
-                    url: '/productos/eliminar_producto/',
-                    data: { "indice" : pdata },
-                    success: function (data) {
-                        console.log(data)
-                        $('TableProductos').draw();
-                    },
-                    error: function(data) {
-                        console.log(data)
-                    }
-                });
-                $('#buttonBorrar').removeClass('btn btn-danger');
-                $('#buttonBorrar').addClass('btn btn-danger disabled');
-                console.log("Borraste " + borrarDato);
-            } );
-
-            $("#AltaProductoBtn").click(function(){
-                $("#AltaProductoModal").modal();
-            });
-
-            $("#EditarProductoBtn").click(function(){
-                $("#EditarProductoModal").modal();
-            });
-            
             $.ajaxSetup({ 
                 beforeSend: function(xhr, settings) {
                     function getCookie(name) {
@@ -306,7 +240,6 @@
             });
     } );
     
-
    
 </script>
 
