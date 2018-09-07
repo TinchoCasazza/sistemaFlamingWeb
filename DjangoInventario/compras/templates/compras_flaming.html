@@ -43,23 +43,29 @@
                                 {% for compra in lista_compras %}
                                 <tr>
                                     <td>
-                                        {{ compra.producto}}
+                                        {{ compra.producto }}
                                     </td>
                                     <td>
-                                        {{ producto.Detalle }}
+                                        0
                                     </td>
                                     <td>
-                                        ${{ producto.PrecioVenta }}
+                                        0
                                     </td>
                                     <td>
-                                        ${{ producto.PrecioCosto }} </td>
+                                        0
                                     </td>
                                     <td>
-                                        ${{ producto.calcularGanancia }}
+                                        0
+                                    </td>
+                                    <td>
+                                        0
+                                    </td>
+                                    <td>
+                                        0
                                     </td>
                                 </tr>
                                 {% empty %}
-                                <p>No hay productos cargados.</p>
+                                    <p>No hay productos cargados.</p>
                                 {% endfor %}
 
                             </tbody>
@@ -74,8 +80,8 @@
         </div>
     </div>
 </div>   
-
-            
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="../static/js/gestion.js"></script>
 {% endblock %}
 
 
