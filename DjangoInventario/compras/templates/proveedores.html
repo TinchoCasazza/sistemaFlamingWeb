@@ -14,9 +14,9 @@
             </div>
 
             <div class="col-xs-4" style="margin-top: 15px; text-align: right;">
-                <button type="button" class="btn btn-primary" id="EditarProveedoresBtn">Editar</button>
-                <button type="button" id="buttonBorrar" onclick="borrarElemento('TableProveedores' , '/productos/eliminar_proveedor/' , 'buttonBorrar')">Eliminar</button>
                 <button type="button" class="btn btn-success" id="AltaProveedorBtn">Nuevo</button>
+                <button type="button" class="btn btn-primary" id="EditarProveedoresBtn">Editar</button>
+                <button type="button" id="buttonBorrar" onclick="borrarElemento('TableProveedores' , '/proveedores/eliminar_proveedor/' , 'buttonBorrar')">Eliminar</button>
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
@@ -29,6 +29,7 @@
                         <table width="100%" class="table table-bordered dataTable no-footer dtr-inline" id="TableProveedores" role="grid" aria-describedby="dataTables-example_info" style="width: 100%;">
                                 <thead>
                                         <tr>
+                                            <th>id</th>
                                             <th>Nombre</th> 
                                             <th>Apellido</th>
                                             <th>CUIT</th>
@@ -38,6 +39,9 @@
                                     <tbody>
                                         {% for proveedor in lista_proveedores %}
                                             <tr>
+                                                <td>
+                                                    {{ proveedor.id }}
+                                                </td>
                                                 <td> 
                                                     {{ proveedor.Nombre }} 
                                                 </td> 
@@ -103,13 +107,13 @@
                     <h4 class="modal-title" style="font-family: Boogaloo; font-size: 22px;">Editar Proveedor</h4>
                     </div>
                     <div class="modal-body">
-                    <form method="POST" action="/productos/" id="editarProveedor">
+                    <form method="POST" action="/proveedores/" id="editarProveedor">
                         {% csrf_token %} {{ form.as_p }}
                         <input type="hidden" name="PK" id="id_pk" maxlength="50">
                     </form>
                     </div>
                         <div class="modal-footer">
-                            <button type="submit" id="bttn_proveedor" class="btn btn-success" data-dismiss="modal" onclick="editarElemento( 'editarProducto' , '/productos/editar_producto/' )" value="Agregar">Guardar</button>
+                            <button type="submit" id="bttn_proveedor" class="btn btn-success" data-dismiss="modal" onclick="editarElemento( 'editarProveedor' , '/proveedores/editar_proveedor/' )" value="Agregar">Guardar</button>
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                         </div>
                 </div>
@@ -155,19 +159,20 @@
                     }
                 } );
                 
-        // Alta Producto
+        // Alta Proveedor
 
         $('#AltaProveedorBtn').click( function () {
             $("#AltaProveedorModal").modal();
         } );
 
-        // Editar Producto
+        // Editar Proveedor
 
         $('#EditarProveedoresBtn').click( function () {
             var pdata = table.row('.selected').data()
-            $('form input[name$="Apellido"]').val(pdata[1]),
-            $('form input[name$="CUIT"]').val(pdata[2]),
-            $('form input[name$="Direccion"]').val(pdata[3]);
+            $('form input[name$="Nombre"]').val(pdata[1]),
+            $('form input[name$="Apellido"]').val(pdata[2]),
+            $('form input[name$="CUIT"]').val(pdata[3]),
+            $('form input[name$="Direccion"]').val(pdata[4]);
             $('input:hidden[name=PK]').val(pdata[0])
             console.log(pdata)
         } );
@@ -184,4 +189,5 @@
 
 </script>
 
+<script type="text/javascript" src="../static/js/productos.js"></script>
 {% endblock %}

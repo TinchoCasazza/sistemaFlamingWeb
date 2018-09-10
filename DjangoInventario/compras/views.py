@@ -67,6 +67,28 @@ def proveedores(request):
                 formProveedores = forms.ProveedorForm()
         return render(request, 'proveedores.html', {'form':formProveedores, 'lista_proveedores':lista_proveedores})
 
+def proveedores_eliminar(request):
+        if request.method == 'POST':        
+                indice = request.POST['indice']
+                proveedores = Proveedor.objects.all().order_by('Apellido')
+                proveedores[int(indice)].delete()
+                lista_proveedores = Proveedor.objects.all().order_by('Apellido') 
+                formProveedores = forms.ProveedorForm() 
+               
+                return render(request, 'productos.html', {'lista_productos':lista_productos , 'form' : formProveedores})
+
+def proveedores_editar(request):
+        if request.method == 'POST':
+                formProveedores = forms.ProveedorForm(request.POST)
+                if formProveedores.is_valid():
+                        get_proveedor = Proveedor.objects.get(id = request.POST['PK'])
+                        formProveedores = forms.ProveedorForm(request.POST, instance = get_proveedor)
+                        formProveedores.save()
+                        lista_proveedores = Proveedor.objects.all().order_by('Apellido')    
+        return render(request, 'proveedor.html', {'lista_proveedores':lista_proveedores , 'form' : formProveedores})        
+        
+
+
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib import messages
 
