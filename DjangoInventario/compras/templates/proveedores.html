@@ -10,6 +10,14 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
+            <div class="col-xs-8">
+            </div>
+
+            <div class="col-xs-4" style="margin-top: 15px; text-align: right;">
+                <button type="button" class="btn btn-primary" id="EditarProveedoresBtn">Editar</button>
+                <button type="button" id="buttonBorrar" onclick="borrarElemento('TableProveedores' , '/productos/eliminar_proveedor/' , 'buttonBorrar')">Eliminar</button>
+                <button type="button" class="btn btn-success" id="AltaProveedorBtn">Nuevo</button>
+            </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
                 <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
@@ -18,7 +26,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <table width="100%" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" id="TableProveedores" role="grid" aria-describedby="dataTables-example_info" style="width: 100%;">
+                        <table width="100%" class="table table-bordered dataTable no-footer dtr-inline" id="TableProveedores" role="grid" aria-describedby="dataTables-example_info" style="width: 100%;">
                                 <thead>
                                         <tr>
                                             <th>Nombre</th> 
@@ -59,11 +67,121 @@
         <!-- /.panel -->
     </div>
     <!-- /.col-lg-12 -->  
+
+    <!-- Modal Alta-->
+        <div class="modal fade" id="AltaProveedorModal" role="dialog">
+            <div class="modal-dialog">
+            
+            <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                
+                    <h4 class="modal-title" style="font-family: Boogaloo; font-size: 22px;">Agregar Proveedor</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" action="/productos/" id="nuevoProveedor">
+                            {% csrf_token %} {{ form.as_p }}
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="bttn_proveedor" class="btn btn-success" data-dismiss="modal" onclick="altaElemento('nuevoProducto','/productos/' )" value="Agregar">Agregar</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            
+            </div>
+        </div>    
+        
+        <!-- Modal Editar-->
+        <div class="modal fade" id="EditarProveedorModal" role="dialog">
+            <div class="modal-dialog">
+                    
+            <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        
+                    <h4 class="modal-title" style="font-family: Boogaloo; font-size: 22px;">Editar Proveedor</h4>
+                    </div>
+                    <div class="modal-body">
+                    <form method="POST" action="/productos/" id="editarProveedor">
+                        {% csrf_token %} {{ form.as_p }}
+                        <input type="hidden" name="PK" id="id_pk" maxlength="50">
+                    </form>
+                    </div>
+                        <div class="modal-footer">
+                            <button type="submit" id="bttn_proveedor" class="btn btn-success" data-dismiss="modal" onclick="editarElemento( 'editarProducto' , '/productos/editar_producto/' )" value="Agregar">Guardar</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        </div>
+                </div>
+                    
+            </div>
+        </div>     
 </div>
 
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript"  href="../static/DataTables/jquery.datatables.js"></script>
+
+<script type="text/javascript" src="../static/js/base.js"></script>
+
 <script>
-        
-          
+
+    $(document).ready(function() {  
+        formatoTabla("TableProveedores");
+
+        $('#buttonBorrar').addClass('btn btn-danger disabled');
+        $('#EditarProveedoresBtn').addClass('btn btn-primary disabled');
+        $( "#TableProveedores_paginate" ).add('');
+
+        var table = $('#TableProveedores').DataTable();
+
+        $('#TableProveedores tbody').on( 'click', 'tr', function () {
+                    $('#buttonBorrar').removeClass('btn btn-danger disabled');
+                    $('#buttonBorrar').addClass('btn btn-danger');
+                    $('#EditarProveedoresBtn').removeClass('btn btn-primary disabled');
+                    $('#EditarProveedoresBtn').addClass('btn btn-primary');
+                    if ( $(this).hasClass('selected') ) {
+                        $(this).removeClass('selected');
+                        $('#buttonBorrar').removeClass('btn btn-danger');
+                        $('#buttonBorrar').addClass('btn btn-danger disabled');
+                        $('#EditarProveedoresBtn').removeClass('btn btn-primary');
+                        $('#EditarProveedoresBtn').addClass('btn btn-primary disabled');
+                    }
+                    else {
+                        
+                        table.$('tr.selected').removeClass('selected');
+                        borrarDato = this.cells[0].innerText;
+                        $(this).addClass('selected');
+                    }
+                } );
+                
+        // Alta Producto
+
+        $('#AltaProveedorBtn').click( function () {
+            $("#AltaProveedorModal").modal();
+        } );
+
+        // Editar Producto
+
+        $('#EditarProveedoresBtn').click( function () {
+            var pdata = table.row('.selected').data()
+            $('form input[name$="Apellido"]').val(pdata[1]),
+            $('form input[name$="CUIT"]').val(pdata[2]),
+            $('form input[name$="Direccion"]').val(pdata[3]);
+            $('input:hidden[name=PK]').val(pdata[0])
+            console.log(pdata)
+        } );
+
+            
+        $("#EditarProveedoresBtn").click(function(){
+            $("#EditarProveedorModal").modal();
+        });
+
+
+    } );
+
+    
+
 </script>
 
 {% endblock %}
